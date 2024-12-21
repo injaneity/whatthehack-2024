@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,16 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+} from '@/components/ui/card';
 
 interface ProductCardProps {
   id: string;
@@ -37,36 +28,45 @@ export default function ProductCard({
   tags,
   url,
   status,
-  username
+  username,
 }: ProductCardProps) {
-
-  const telegramLink = `https://telegram/me/${username}`
+  const telegramLink = `https://telegram.me/${username}`;
 
   return (
-    <Card className="w-[350px]">
-      <CardHeader>
+    <Card className="w-[350px] flex flex-col">
+      <CardHeader className="p-4">
         <CardTitle>{title}</CardTitle>
-        <img
-          src={url}
-          alt={`Image of ${title}`}
-          className="object-cover w-full h-full"
-        />
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <a href={telegramLink} target="_blank" rel="noopener noreferrer">
-        <img
-          src="/assets/teelgram.png"
-          alt="Contact on Telegram"
-          width={40}
-          height={40}
-          className="cursor-pointer"
+        <div className="relative w-full h-48 overflow-hidden rounded-lg">
+          <img
+            src={url}
+            alt={`Image of ${title}`}
+            className="w-full h-full object-cover"
           />
-      </a>
+        </div>
+        <CardDescription className="mt-2">{description}</CardDescription>
+      </CardHeader>
 
-      <CardFooter className="flex justify-between">
-        <Button>Reserve</Button>
-        <Button variant="neutral">Deploy</Button>
+      <CardFooter className="flex justify-between items-center gap-3 mt-auto">
+        
+          
+          <a
+            className="inline-block"
+            href={telegramLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/assets/telegram.png"
+              alt="Contact on Telegram"
+              width={40}
+              height={40}
+              className="cursor-pointer"
+            />
+          </a>
+
+          <Button>Reserve</Button>
+    
       </CardFooter>
     </Card>
-  )
+  );
 }
