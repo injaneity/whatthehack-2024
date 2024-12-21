@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -17,10 +16,9 @@ interface ProductCardProps {
   description: string;
   price: number | "Free";
   image: string | string[];
-  category: string;
 }
 
-export default function ProductCard({ title, description, price, image, category }: ProductCardProps) {
+export default function ProductCard({ title, description, price, image }: ProductCardProps) {
   const images = Array.isArray(image) ? image : [image]; // Ensure images is always an array
 
   return (
@@ -54,7 +52,6 @@ export default function ProductCard({ title, description, price, image, category
       </CardHeader>
       <CardContent>
         <p className="text-sm text-gray-600 mb-2">{description}</p>
-        <Badge>{category}</Badge>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <span className="text-lg font-bold">

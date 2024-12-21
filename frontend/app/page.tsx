@@ -2,10 +2,8 @@
 
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
-import { useRouter } from 'next/router';
-import { notFound } from 'next/navigation';
 
-async function getProducts(searchQuery) {
+async function getProducts(searchQuery: string | undefined) {
     const allProducts = [
         { id: "1", title: "Textbook", description: "Intro to Computer Science", price: 30, image: "/frontend/components/icons/logo.png?height=200&width=200", category: "Books" },
         { id: "2", title: "Desk Lamp", description: "Adjustable LED lamp", price: 15, image: "/frontend/components/icons/logo.png?height=200&width=200", category: "Furniture" },
@@ -27,7 +25,11 @@ async function getProducts(searchQuery) {
     );
 }
 
-export default async function Home({ searchParams }) {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Record<string, string | undefined>;
+}){
     const searchQuery = searchParams.query || "";
     const products = await getProducts(searchQuery);
 

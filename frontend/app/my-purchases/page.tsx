@@ -3,10 +3,49 @@ import ProductCard from "@/components/ProductCard"
 
 async function getProducts() {
   return [
-    { id: "1", title: "Textbook", description: "Intro to Computer Science", price: 30, image: "/placeholder.svg?height=200&width=200", category: "Books" },
-    { id: "2", title: "Desk Lamp", description: "Adjustable LED lamp", price: 15, image: "/placeholder.svg?height=200&width=200", category: "Furniture" },
-    { id: "3", title: "Backpack", description: "Lightly used backpack", price: 0, image: "/placeholder.svg?height=200&width=200", category: "Accessories" },
-  ]
+    {
+      id: "1",
+      title: "Textbook",
+      description: "Intro to Computer Science",
+      price: 30,
+      image: ["/assets/image1.jpg", "assets/image2.jpg"],
+    },
+    {
+      id: "2",
+      title: "Desk Lamp",
+      description: "Adjustable LED lamp",
+      price: 15,
+      image: ["/image3.jpg"],
+    },
+    {
+      id: "3",
+      title: "Backpack",
+      description: "Lightly used backpack",
+      price: 0,
+      image: ["/image5.jpg", "/image6.jpg"],
+    },
+    {
+      id: "1",
+      title: "Textbook",
+      description: "Intro to Computer Science",
+      price: 30,
+      image: ["/assets/image1.jpg", "assets/image2.jpg"],
+    },
+    {
+      id: "2",
+      title: "Desk Lamp",
+      description: "Adjustable LED lamp",
+      price: 15,
+      image: ["/image3.jpg"],
+    },
+    {
+      id: "3",
+      title: "Backpack",
+      description: "Lightly used backpack",
+      price: 0,
+      image: ["/image5.jpg", "/image6.jpg"],
+    }
+  ];
 }
 
 export default async function Home() {

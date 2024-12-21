@@ -21,11 +21,14 @@ export default function Header() {
             <Button className="w-40" asChild>
               <Link href="/new-listing">New Listing</Link>
             </Button>
-            <Button className="w-40 p-0" variant="link" asChild>
+            <Button className="px-6" variant="link" asChild>
               <Link href="/my-listings">My Listings</Link>
             </Button>
-            <Button className="w-40 p-0" variant="link" asChild>
+            <Button className="pl-0 pr-6" variant="link" asChild>
               <Link href="/my-purchases">My Purchases</Link>
+            </Button>
+            <Button className="pl-0 pr-6" variant="link" asChild>
+              <Link href="/">Marketplace</Link>
             </Button>
             <SignedIn>
               <UserButton />

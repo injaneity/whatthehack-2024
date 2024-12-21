@@ -9,15 +9,13 @@ async function getProducts() {
         description: "Intro to Computer Science",
         price: 30,
         image: ["/assets/image1.jpg", "assets/image2.jpg"],
-        category: "Books",
       },
       {
         id: "2",
         title: "Desk Lamp",
         description: "Adjustable LED lamp",
         price: 15,
-        image: ["/image3.jpg", "/image4.jpg"],
-        category: "Furniture",
+        image: ["/image3.jpg"],
       },
       {
         id: "3",
@@ -25,8 +23,28 @@ async function getProducts() {
         description: "Lightly used backpack",
         price: 0,
         image: ["/image5.jpg", "/image6.jpg"],
-        category: "Accessories",
       },
+      {
+        id: "1",
+        title: "Textbook",
+        description: "Intro to Computer Science",
+        price: 30,
+        image: ["/assets/image1.jpg", "assets/image2.jpg"],
+      },
+      {
+        id: "2",
+        title: "Desk Lamp",
+        description: "Adjustable LED lamp",
+        price: 15,
+        image: ["/image3.jpg"],
+      },
+      {
+        id: "3",
+        title: "Backpack",
+        description: "Lightly used backpack",
+        price: 0,
+        image: ["/image5.jpg", "/image6.jpg"],
+      }
     ];
   }
 
