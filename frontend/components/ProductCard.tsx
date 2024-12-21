@@ -22,7 +22,7 @@ export default function ProductCard({ title, description, price, image }: Produc
   const images = Array.isArray(image) ? image : [image]; // Ensure images is always an array
 
   return (
-    <Card className="w-full max-w-sm mx-auto">
+    <Card className="w-full max-w-sm mx-auto border border-transparent rounded-lg shadow-md hover:border-black hover:border-[3px] hover:shadow-xl transition duration-300">
       <CardHeader>
         <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
           <Carousel className="relative w-full h-full">
