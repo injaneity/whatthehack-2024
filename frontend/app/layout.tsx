@@ -3,7 +3,6 @@ import { neobrutalism } from '@clerk/themes'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { cn } from "@/lib/utils";
-import DotPattern from "@/components/ui/dot-pattern";
 
 const inter = Inter({ subsets: ['latin'] })
 
