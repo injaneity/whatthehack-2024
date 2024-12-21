@@ -3,20 +3,19 @@ import ProductCard from "@/components/ProductCard";
 import allProducts from "@/public/data.json";
 
 async function getProducts(searchQuery: string | undefined) {
-    // If no search query is provided, return all products
-    if (!searchQuery) {
-        return allProducts;
-    }
+  // If no search query is provided, return all products
+  if (!searchQuery) {
+      return allProducts;
+  }
 
-    const lowerCaseQuery = searchQuery.toLowerCase();
+  const lowerCaseQuery = searchQuery.toLowerCase();
 
-    // Filter products based on title, description, or tags
-    return allProducts.filter((product) =>
-        [product.title, product.description, ...(product.tags || [])]
-            .join(" ")
-            .toLowerCase()
-            .includes(lowerCaseQuery)
-    );
+  // Filter products based on title, description, or tags
+  return allProducts.filter((product) =>
+      product.title.toLowerCase().includes(lowerCaseQuery) ||
+      product.description.toLowerCase().includes(lowerCaseQuery) ||
+      product.tags.some((tag) => tag.toLowerCase().includes(lowerCaseQuery))
+  );
 }
 
 export default async function Home({

@@ -22,7 +22,7 @@
             "lamp"
         ],
         "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/desk_lamp.png",
-        "status": "available",
+        "status": "reserved",
         "created_at": "2024-12-20T11:15:24.123000",
         "id": "12f3c45b-9876-4a21-8abc-1d23e4f56789"
     },
@@ -50,7 +50,7 @@
             "headphones"
         ],
         "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/bluetooth_headphones.png",
-        "status": "available",
+        "status": "reserved",
         "created_at": "2024-12-19T14:45:12.563000",
         "id": "5678abcd-1234-4f56-9e78-90123efg4567"
     },
@@ -78,7 +78,7 @@
             "decor"
         ],
         "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/ceramic_plant_pot.png",
-        "status": "available",
+        "status": "reserved",
         "created_at": "2024-12-17T17:20:45.893000",
         "id": "abc12345-6789-0123-4567-def890123456"
     }
