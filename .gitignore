@@ -11,6 +11,7 @@
 # BACKEND
 backend/app/__pycache__
 backend/venv/
+__pycache__/
 
 # FRONTEND
 frontend/node_modules
