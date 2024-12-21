@@ -35,7 +35,7 @@
             "accessories",
             "vintage"
         ],
-        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/vintage_backpack.png",
+        "url": "/assets/image1.jpg",
         "status": "available",
         "created_at": "2024-12-18T09:30:00.000000",
         "id": "8cd3b789-6784-42bd-a432-7d12e6a93456"
@@ -63,7 +63,7 @@
             "kitchen",
             "baking"
         ],
-        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/baking_set.png",
+        "url": "/assets/image2.jpg",
         "status": "available",
         "created_at": "2024-12-21T08:00:00.000000",
         "id": "a1b2c3d4-5678-9e01-2345-f6g7h8i9j0kl"
