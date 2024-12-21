@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
-def get_tags():
+def get_tags(file_url):
     load_dotenv()
 
     client = OpenAI()
@@ -18,7 +18,7 @@ def get_tags():
                     {
                         "type": "image_url",
                         "image_url": {
-                            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+                            "url": file_url,
                         },
                     },
                 ],
@@ -28,5 +28,5 @@ def get_tags():
     )
 
     tags_str = response.choices[0].message.content.strip().split("\n")
-
+    print("tags_str: ",tags_str)
     return tags_str[1]
