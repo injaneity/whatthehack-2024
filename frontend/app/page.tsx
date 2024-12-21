@@ -32,45 +32,47 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
   const { user } = useUser();
   const currentUsername = user?.username ?? ""; // Retrieve the current user's username
   const [products, setProducts] = useState(allProducts);
+  const searchQuery = searchParams.query || ""; // Extract the search query from searchParams
 
   useEffect(() => {
     if (currentUsername) { // Ensure `currentUsername` is not empty
-      const searchQuery = searchParams.query || "";
       const filteredProducts = filterProducts(searchQuery, currentUsername);
       setProducts(filteredProducts);
     }
-  }, [searchParams, currentUsername]); // Depend on `currentUsername`
+  }, [searchQuery, currentUsername]); // Depend on `currentUsername` and `searchQuery`
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Marketplace</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">Marketplace</h1>
 
-        {/* Display current username */}
-        {currentUsername && <p className="mb-4 text-gray-700">Logged in as: {currentUsername}</p>}
-
-                {/* Search Bar */}
-                <form method="GET" className="mb-6">
-                    <Input className="w-full"  type="text"
-                        name="query"
-                        placeholder="Search products..."
-                        defaultValue={searchQuery} />
-                    <Button
-                        type="submit"
-                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                    >
-                        Search
-                    </Button>
-                </form>
+        {/* Search Bar */}
+        <form method="GET" className="mb-6 flex items-center gap-2 px-4 ">
+        <Input
+          className="flex-grow"
+          type="text"
+          name="query"
+          placeholder="Search products..."
+          defaultValue={searchQuery}
+        />
+        <Button
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        >
+          Search
+        </Button>
+      </form>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.length > 0 ? (
-            products.map((product) => <ProductCard key={product.id} {...product} />)
-          ) : (
-            <p className="text-gray-700">No products found.</p>
-          )}
+        <div className="max-w-7xl mx-auto m-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-items-center">
+            {products.length > 0 ? (
+              products.map((product) => <ProductCard key={product.id} {...product} />)
+            ) : (
+              <p className="text-gray-700">No products found.</p>
+            )}
+          </div>
         </div>
       </main>
     </div>
