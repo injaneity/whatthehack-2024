@@ -1,43 +1,70 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
+"use client";
+
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface ProductCardProps {
-  id: string
-  title: string
-  description: string
-  price: number | "Free"
-  image: string
-  category: string
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  tags: string[];
+  url: string;
+  status: string;
+  username: string;
 }
 
-export default function ProductCard({title, description, price, image, category }: ProductCardProps) {
+export default function ProductCard({
+  title,
+  description,
+  price,
+  url,
+  username,
+}: ProductCardProps) {
+  const telegramLink = `https://telegram.me/${username}`;
+
   return (
-    <Card className="w-full max-w-sm mx-auto">
-      <CardHeader>
-        <div className="relative w-full h-48">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            style={{ objectFit: "cover" }}
-            className="rounded-t-lg"
+    <Card className="w-[350px] flex flex-col">
+      <CardHeader className="p-4">
+        <CardTitle>{title}</CardTitle>
+        <div className="relative w-full h-48 overflow-hidden rounded-lg pt-2">
+          <img
+            src={url}
+            alt={`Image of ${title}`}
+            className="w-full h-full object-cover"
           />
         </div>
-        <CardTitle className="mt-2">{title}</CardTitle>
+        <CardDescription className="text-left">{description}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <p className="text-sm text-gray-600 mb-2">{description}</p>
-        <Badge>{category}</Badge>
-      </CardContent>
-      <CardFooter className="flex justify-between items-center">
+
+      <CardFooter className="flex justify-between items-center gap-3 mt-auto">
         <span className="text-lg font-bold">
-          {price === 0 ? "Free" : `$${price}`}
+          {price === 0 ? 'Free' : `$${price}`}
         </span>
-        <Button>Buy</Button>
+        <div className="flex items-center gap-3">
+          <a
+            className="inline-block"
+            href={telegramLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/assets/telegram.png"
+              alt="Contact on Telegram"
+              width={40}
+              height={40}
+              className="cursor-pointer"
+            />
+          </a>
+          <Button>Reserve</Button>
+        </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
-
