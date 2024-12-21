@@ -7,10 +7,11 @@ from datetime import datetime
 class ListingStatus(str, Enum):
     available = "available"
     reserved = "reserved"
-    unavailable = "unavailable"
+    complete = "complete"
 
 class ListingBase(BaseModel):
     username: str
+    buyer_username: str
     title: str
     price: float
     description: str
@@ -24,7 +25,8 @@ class ListingCreate(ListingBase):
     pass
 
 class ListingUpdate(BaseModel):
-    username: Optional[str]
+    username: str
+    buyer_username: Optional[str]
     price: Optional[float]
     description: Optional[str]
     url: Optional[AnyUrl]

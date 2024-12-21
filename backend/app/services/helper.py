@@ -9,6 +9,7 @@ def listing_helper(listing) -> ListingOut:
     return ListingOut(
         id=listing.get("id"),
         username=listing["username"],
+        buyer_username=listing["buyer_username"],
         title=listing["title"],
         price=listing["price"],
         description=listing["description"],
