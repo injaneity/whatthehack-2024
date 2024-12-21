@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-      <header className="bg-[#D8FED0] shadow-sm">
+      <header className="bg-[#ffffff] shadow-sm">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center text-2xl font-bold text-gray-900">
             <Image
@@ -18,7 +18,7 @@ export default function Header() {
             />
           </Link>
           <div className="flex items-center">
-            <Button className="w-40" asChild>
+            <Button className="w-40" variant="default" asChild>
               <Link href="/new-listing">New Listing</Link>
             </Button>
             <Button className="px-6" variant="link" asChild>

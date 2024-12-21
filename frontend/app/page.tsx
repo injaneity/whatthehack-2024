@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import allProducts from "@/public/data.json";
 import { useUser } from "@clerk/clerk-react";
 
@@ -48,22 +50,19 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
         {/* Display current username */}
         {currentUsername && <p className="mb-4 text-gray-700">Logged in as: {currentUsername}</p>}
 
-        {/* Search Bar */}
-        <form method="GET" className="mb-6">
-          <input
-            type="text"
-            name="query"
-            placeholder="Search products..."
-            defaultValue={searchParams.query}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            type="submit"
-            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-          >
-            Search
-          </button>
-        </form>
+                {/* Search Bar */}
+                <form method="GET" className="mb-6">
+                    <Input className="w-full"  type="text"
+                        name="query"
+                        placeholder="Search products..."
+                        defaultValue={searchQuery} />
+                    <Button
+                        type="submit"
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                    >
+                        Search
+                    </Button>
+                </form>
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
