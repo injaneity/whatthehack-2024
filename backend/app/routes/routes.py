@@ -21,11 +21,12 @@ async def create_listing(
     file: UploadFile = File(...)
 ):
     try:
-        # Extract tags from description
-        tags = extract_tags(description)
 
         # Upload file to S3
         file_url = upload_file_to_s3(file.file, file.filename)
+
+        # Extract tags from description
+        tags = extract_tags(file_url)
         
         listing_id = str(uuid4())
         current_time = datetime.utcnow()
