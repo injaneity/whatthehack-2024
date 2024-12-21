@@ -1,19 +1,13 @@
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
-import models
-from database import SessionLocal, engine
+# main.py
 
-app = FastAPI()
+from fastapi import FastAPI
+from app.database import create_indexes
+from app.routes.routes import router
+
+app = FastAPI(title="Listings API", version="1.0")
+
+@app.on_event("startup")
+async def startup_event():
+    await create_indexes()
     
-@app.get("/")
-async def health_check():
-    return "working"
-
-# Dependency to get a database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-        
+app.include_router(router)

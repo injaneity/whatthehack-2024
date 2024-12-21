@@ -1,21 +1,25 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo.errors import ServerSelectionTimeoutError
 import os
-
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Retrieve the DATABASE_URL from environment variables
-DATABASE_URL = os.getenv("DATABASE_URL")  # e.g., "postgresql://myuser:mypassword@localhost/mydatabase"
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
+DATABASE_NAME = os.getenv("DATABASE_NAME", "mydatabase")
+COLLECTION_NAME = "listing"
 
-# Create the SQLAlchemy engine
-engine = create_engine(DATABASE_URL)
+client = AsyncIOMotorClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+db = client[DATABASE_NAME]
+listing_collection = db[COLLECTION_NAME]
 
-# Create a configured "Session" class
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Create a base class for declarative models
-Base = declarative_base()
+async def create_indexes():
+    try:
+        await listing_collection.create_index("id", unique=True)
+        print("Indexes created successfully.")
+    except ServerSelectionTimeoutError as err:
+        print(f"Failed to connect to MongoDB: {err}")
+        exit(1)
+    except Exception as err:
+        print(f"An error occurred while creating indexes: {err}")
+        exit(1)
