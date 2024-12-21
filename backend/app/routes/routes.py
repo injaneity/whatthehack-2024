@@ -34,6 +34,7 @@ async def create_listing(
         listing_data = {
             "id": listing_id,
             "username": username,
+            "buyer_username": "",
             "title": title,
             "price": price,
             "description": description,
@@ -72,8 +73,8 @@ async def get_listing_by_id(listing_id: str):
         raise HTTPException(status_code=500, detail="Failed to retrieve listing.")
 
     
-@router.get("/listings/username/{username}", response_model=List[ListingOut])
-async def get_listings_by_username(username: str):
+@router.get("/listings/seller/{username}", response_model=List[ListingOut])
+async def get_listings_by_seller(username: str):
     try:
         # Query the database for listings by username
         print(username)
@@ -83,29 +84,50 @@ async def get_listings_by_username(username: str):
             raise HTTPException(status_code=404, detail="No listings found for the given username")
         return [listing_helper(listing) for listing in listings]
     except Exception as e:
-        print(f"Error retrieving listings by username: {e}")
+        print(f"Error retrieving listings by seller: {e}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve listings.")
+    
+@router.get("/listings/buyer/{username}", response_model=List[ListingOut])
+async def get_listings_by_buyer(username: str):
+    try:
+        # Query the database for listings by username
+        cursor = listing_collection.find({"buyer_username": username})
+        listings = await cursor.to_list(length=100)
+        if not listings:
+            raise HTTPException(status_code=404, detail="No listings found for the given username")
+        return [listing_helper(listing) for listing in listings]
+    except Exception as e:
+        print(f"Error retrieving listings by buyer: {e}")
         raise HTTPException(status_code=500, detail="Failed to retrieve listings.")
 
 
+from fastapi import Form
+
 @router.put("/listings/{listing_id}", response_model=ListingOut)
-async def update_listing(listing_id: str, listing: ListingUpdate):
-    update_data = {k: v for k, v in listing.dict().items() if v is not None}
-
-    # Extract tags if description is updated
-    if "description" in update_data:
-        update_data["tags"] = extract_tags(update_data["description"])
-
+async def update_listing(
+    listing_id: str,
+    username: str = Form(...),  # Accept username as form data
+    buyer_username: str = Form(...)  # Accept buyer_username as form data
+):
     try:
+        update_data = {
+            "username": username,
+            "buyer_username": buyer_username
+        }
+
+        # Update the listing in the database
         result = await listing_collection.update_one(
             {"id": listing_id},
             {"$set": update_data}
         )
         if result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Listing not found")
+        
         updated_listing = await listing_collection.find_one({"id": listing_id})
         return listing_helper(updated_listing)
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Failed to update listing.")
+        raise HTTPException(status_code=500, detail=f"Failed to update listing: {str(e)}")
+
 
 
 @router.delete("/listings/{listing_id}", response_model=dict)
