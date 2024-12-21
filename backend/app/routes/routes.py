@@ -21,11 +21,12 @@ async def create_listing(
     file: UploadFile = File(...)
 ):
     try:
-        # Extract tags from description
-        tags = extract_tags(description)
 
         # Upload file to S3
         file_url = upload_file_to_s3(file.file, file.filename)
+
+        # Extract tags from description
+        tags = extract_tags(file_url)
         
         listing_id = str(uuid4())
         current_time = datetime.utcnow()
@@ -48,6 +49,7 @@ async def create_listing(
         new_listing = await listing_collection.find_one({"_id": result.inserted_id})
         return listing_helper(new_listing)
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail="Failed to create listing.")
 
 @router.get("/listings/", response_model=List[ListingOut])
