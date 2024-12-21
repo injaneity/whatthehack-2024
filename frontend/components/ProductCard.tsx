@@ -43,12 +43,14 @@ export default function ProductCard({
             className="w-full h-full object-cover"
           />
         </div>
-        <CardDescription className="mt-2">{description}</CardDescription>
+        <CardDescription className="text-left mt-2">{description}</CardDescription>
       </CardHeader>
 
       <CardFooter className="flex justify-between items-center gap-3 mt-auto">
-        
-          
+        <span className="text-lg font-bold">
+          {price === 0 ? 'Free' : `$${price}`}
+        </span>
+        <div className="flex items-center gap-3">
           <a
             className="inline-block"
             href={telegramLink}
@@ -63,9 +65,8 @@ export default function ProductCard({
               className="cursor-pointer"
             />
           </a>
-
           <Button>Reserve</Button>
-    
+        </div>
       </CardFooter>
     </Card>
   );
