@@ -2,12 +2,20 @@ import { SignedIn, UserButton } from '@clerk/nextjs'
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+import Image from 'next/image';
+
 export default function Header() {
   return (
       <header className="bg-white shadow-sm">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
-            ishowscripts
+          <Link href="/" className="flex items-center text-2xl font-bold text-gray-900">
+            <Image
+                src="/assets/logo.png"
+                alt="Logo"
+                width={180}
+                height={180}
+                className="mr-2"
+            />
           </Link>
           <div className="flex items-center">
             <Button className="w-40" asChild>
