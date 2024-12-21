@@ -1,40 +1,54 @@
 "use client";
 
-import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import telegramIcon from "@/components/icons/telegram.png";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface ProductCardProps {
   id: string;
   title: string;
   description: string;
   price: number | "Free";
-  image: string | string[]; // Allow single or multiple images
+  image: string | string[];
   category: string;
 }
 
 export default function ProductCard({ title, description, price, image, category }: ProductCardProps) {
   const images = Array.isArray(image) ? image : [image]; // Ensure images is always an array
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const handleImageClick = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
 
   return (
     <Card className="w-full max-w-sm mx-auto">
       <CardHeader>
-        <div className="relative w-full h-48 cursor-pointer" onClick={handleImageClick}>
-          <Image
-            src={images[currentImageIndex]}
-            alt={`${title} image ${currentImageIndex + 1}`}
-            fill
-            style={{ objectFit: "cover" }}
-            className="rounded-t-lg"
-          />
+        <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
+          <Carousel className="relative w-full h-full">
+            <CarouselContent>
+              {images.map((src, index) => (
+                <CarouselItem
+                  key={index}
+                  className="relative w-full h-48 flex items-center justify-center"
+                >
+                  <img
+                    src={src}
+                    alt={`Image ${index + 1} for ${title}`}
+                    className="object-cover w-full h-full"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-200"
+            />
+            <CarouselNext
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-200"
+            />
+          </Carousel>
         </div>
         <CardTitle className="mt-2">{title}</CardTitle>
       </CardHeader>
@@ -47,8 +61,8 @@ export default function ProductCard({ title, description, price, image, category
           {price === 0 ? "Free" : `$${price}`}
         </span>
         <div className="flex items-center gap-3">
-          <Image
-            src={telegramIcon}
+          <img
+            src='/assets/telegram.png'
             alt="Telegram"
             width={40}
             height={40}
@@ -60,4 +74,3 @@ export default function ProductCard({ title, description, price, image, category
     </Card>
   );
 }
-

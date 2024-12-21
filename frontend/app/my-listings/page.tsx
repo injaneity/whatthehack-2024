@@ -8,7 +8,7 @@ async function getProducts() {
         title: "Textbook",
         description: "Intro to Computer Science",
         price: 30,
-        image: ["@/components/icons/image1.jpg", "@/components/icons/image2.jpg"],
+        image: ["/assets/image1.jpg", "assets/image2.jpg"],
         category: "Books",
       },
       {
