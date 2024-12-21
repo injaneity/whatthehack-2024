@@ -6,18 +6,18 @@ export default function Header() {
   return (
     <ClerkProvider>
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold text-gray-900">
             ishowscripts
           </Link>
-          <div className="flex items-center space-x-4">
-            <Button asChild>
+          <div className="flex items-center">
+            <Button className="w-40" asChild>
               <Link href="/new-listing">New Listing</Link>
             </Button>
-            <Button variant='link' asChild>
+            <Button className="w-40 p-0" variant="link" asChild>
               <Link href="/my-listings">My Listings</Link>
             </Button>
-            <Button variant='link' asChild>
+            <Button className="w-40 p-0" variant="link" asChild>
               <Link href="/my-purchases">My Purchases</Link>
             </Button>
             <SignedOut>
