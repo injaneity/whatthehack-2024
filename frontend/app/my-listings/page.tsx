@@ -41,7 +41,7 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
   }, [searchQuery, currentUsername]); // Depend on `currentUsername` and `searchQuery`
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#F6F3E8]">
       <Header />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">My Listings</h1>
@@ -57,7 +57,7 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
           />
           <Button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            className="px-4 py-2 bg-[#5964C6] text-white rounded-lg hover:bg-[#3A3F74]"
           >
             Search
           </Button>
@@ -72,7 +72,7 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
           </div>
         ) : (
           <div className="flex items-center justify-center h-[60vh]">
-            <p className="text-gray-700 text-lg">No products found.</p>
+            <p className="text-gray-700 text-2xl">No products found!</p>
           </div>
         )}
       </main>

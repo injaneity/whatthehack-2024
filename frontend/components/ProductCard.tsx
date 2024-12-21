@@ -36,14 +36,14 @@ export default function ProductCard({
     <Card className="w-[350px] flex flex-col">
       <CardHeader className="p-4">
         <CardTitle>{title}</CardTitle>
-        <div className="relative w-full h-48 overflow-hidden rounded-lg">
+        <div className="relative w-full h-48 overflow-hidden rounded-lg pt-2">
           <img
             src={url}
             alt={`Image of ${title}`}
             className="w-full h-full object-cover"
           />
         </div>
-        <CardDescription className="text-left mt-2">{description}</CardDescription>
+        <CardDescription className="text-left">{description}</CardDescription>
       </CardHeader>
 
       <CardFooter className="flex justify-between items-center gap-3 mt-auto">

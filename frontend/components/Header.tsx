@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-      <header className="bg-[#8ED943] shadow-sm">
+      <header className="bg-[#5964C6] shadow-sm">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center text-2xl font-bold text-gray-900">
             <Image
@@ -18,16 +18,16 @@ export default function Header() {
             />
           </Link>
           <div className="flex items-center">
-            <Button className="w-40" variant="default" asChild>
+            <Button className="w-40 text-lg font-bold" variant="default" asChild>
               <Link href="/new-listing">New Listing</Link>
             </Button>
-            <Button className="px-6" variant="link" asChild>
+            <Button className="px-8 text-lg font-bold" variant="link" asChild>
               <Link href="/my-listings">My Listings</Link>
             </Button>
-            <Button className="pl-0 pr-6" variant="link" asChild>
+            <Button className="pl-0 pr-8 text-lg font-bold" variant="link" asChild>
               <Link href="/my-purchases">My Purchases</Link>
             </Button>
-            <Button className="pl-0 pr-6" variant="link" asChild>
+            <Button className="pl-0 pr-8 text-lg font-bold" variant="link" asChild>
               <Link href="/">Marketplace</Link>
             </Button>
             <SignedIn>
