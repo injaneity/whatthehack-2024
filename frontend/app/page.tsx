@@ -1,24 +1,18 @@
-// frontend/app/page.jsx (or the appropriate file in your Next.js project)
-
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
+import allProducts from "@/public/data.json";
 
 async function getProducts(searchQuery: string | undefined) {
-    const allProducts = [
-        { id: "1", title: "Textbook", description: "Intro to Computer Science", price: 30, image: "/frontend/components/icons/logo.png?height=200&width=200", category: "Books" },
-        { id: "2", title: "Desk Lamp", description: "Adjustable LED lamp", price: 15, image: "/frontend/components/icons/logo.png?height=200&width=200", category: "Furniture" },
-        { id: "3", title: "Backpack", description: "Lightly used backpack", price: 0, image: "/frontend/components/icons/logo.png?height=200&width=200", category: "Accessories" },
-        // Add more products as needed
-    ];
-
+    // If no search query is provided, return all products
     if (!searchQuery) {
         return allProducts;
     }
 
     const lowerCaseQuery = searchQuery.toLowerCase();
 
+    // Filter products based on title, description, or tags
     return allProducts.filter((product) =>
-        [product.title, product.description, product.category]
+        [product.title, product.description, ...(product.tags || [])]
             .join(" ")
             .toLowerCase()
             .includes(lowerCaseQuery)
@@ -29,7 +23,7 @@ export default async function Home({
   searchParams,
 }: {
   searchParams: Record<string, string | undefined>;
-}){
+}) {
     const searchQuery = searchParams.query || "";
     const products = await getProducts(searchQuery);
 
@@ -57,7 +51,7 @@ export default async function Home({
                 </form>
 
                 {/* Product Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {products.length > 0 ? (
                         products.map((product) => (
                             <ProductCard key={product.id} {...product} />
@@ -70,4 +64,3 @@ export default async function Home({
         </div>
     );
 }
-

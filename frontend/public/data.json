@@ -1,0 +1,85 @@
+[
+    {
+        "username": "kaedenlim",
+        "title": "sample",
+        "price": 5.0,
+        "description": "test test",
+        "tags": [
+            "yeah"
+        ],
+        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/b6812bff779143da99183550e9f38a8b_alibabacheck.png",
+        "status": "available",
+        "created_at": "2024-12-21T13:20:34.963000",
+        "id": "eed9e2f5-5c26-481f-b2e8-10841e439ee5"
+    },
+    {
+        "username": "lucaswyl",
+        "title": "LED Desk Lamp",
+        "price": 15.0,
+        "description": "A modern LED desk lamp with adjustable brightness.",
+        "tags": [
+            "electronics",
+            "lamp"
+        ],
+        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/desk_lamp.png",
+        "status": "available",
+        "created_at": "2024-12-20T11:15:24.123000",
+        "id": "12f3c45b-9876-4a21-8abc-1d23e4f56789"
+    },
+    {
+        "username": "izacdy",
+        "title": "Vintage Backpack",
+        "price": 25.0,
+        "description": "A lightly used vintage backpack, perfect for daily use.",
+        "tags": [
+            "accessories",
+            "vintage"
+        ],
+        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/vintage_backpack.png",
+        "status": "available",
+        "created_at": "2024-12-18T09:30:00.000000",
+        "id": "8cd3b789-6784-42bd-a432-7d12e6a93456"
+    },
+    {
+        "username": "johnsmith",
+        "title": "Bluetooth Headphones",
+        "price": 50.0,
+        "description": "Noise-cancelling Bluetooth headphones with superior sound quality.",
+        "tags": [
+            "electronics",
+            "headphones"
+        ],
+        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/bluetooth_headphones.png",
+        "status": "available",
+        "created_at": "2024-12-19T14:45:12.563000",
+        "id": "5678abcd-1234-4f56-9e78-90123efg4567"
+    },
+    {
+        "username": "alexlee",
+        "title": "Baking Set",
+        "price": 10.0,
+        "description": "A set of baking tools including measuring cups and a whisk.",
+        "tags": [
+            "kitchen",
+            "baking"
+        ],
+        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/baking_set.png",
+        "status": "available",
+        "created_at": "2024-12-21T08:00:00.000000",
+        "id": "a1b2c3d4-5678-9e01-2345-f6g7h8i9j0kl"
+    },
+    {
+        "username": "sophiakim",
+        "title": "Ceramic Plant Pot",
+        "price": 12.0,
+        "description": "A minimalist ceramic plant pot for indoor plants.",
+        "tags": [
+            "garden",
+            "decor"
+        ],
+        "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/ceramic_plant_pot.png",
+        "status": "available",
+        "created_at": "2024-12-17T17:20:45.893000",
+        "id": "abc12345-6789-0123-4567-def890123456"
+    }
+]
