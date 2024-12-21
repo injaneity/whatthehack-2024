@@ -1,10 +1,11 @@
-import { UserButton } from "@clerk/nextjs";
+import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="bg-white shadow-sm">
+    <ClerkProvider>
+      <header className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-gray-900">
           College Marketplace
@@ -13,10 +14,17 @@ export default function Header() {
           <Button asChild>
             <Link href="/new-listing">New Listing</Link>
           </Button>
-          <UserButton afterSignOutUrl="/" />
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
+      
     </header>
+    </ClerkProvider>
   );
 }
 
