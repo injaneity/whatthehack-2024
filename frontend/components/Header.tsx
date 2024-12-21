@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-      <header className="bg-white shadow-sm">
+      <header className="bg-[#D8FED0] shadow-sm">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center text-2xl font-bold text-gray-900">
             <Image
@@ -31,7 +31,7 @@ export default function Header() {
               <Link href="/">Marketplace</Link>
             </Button>
             <SignedIn>
-              <UserButton />
+              <UserButton/>
             </SignedIn>
           </div>
         </div>
