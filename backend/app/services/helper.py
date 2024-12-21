@@ -1,9 +1,9 @@
 from typing import List
 from app.models.models import ListingOut
+from app.services.vision import get_tags
 
-def extract_tags(description: str) -> List[str]:
-    words = description.split()
-    return words[:3] if len(words) >= 3 else words
+def extract_tags(file_url: str) -> List[str]:
+    return get_tags(file_url)
 
 def listing_helper(listing) -> ListingOut:
     return ListingOut(
