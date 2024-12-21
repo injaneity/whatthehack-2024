@@ -1,11 +1,23 @@
+from enum import Enum
 from pydantic import BaseModel, Field, AnyUrl
 from typing import List, Optional
 
+from datetime import datetime
+
+class ListingStatus(str, Enum):
+    available = "available"
+    reserved = "reserved"
+    unavailable = "unavailable"
+
 class ListingBase(BaseModel):
-    username: str = Field(..., example="john_doe")
-    price: float = Field(..., example=99.99)
-    description: str = Field(..., example="A wonderful product that you will love.")
-    url: Optional[AnyUrl] = Field(None, example="https://example.com/image.jpg")
+    username: str
+    title: str
+    price: float
+    description: str
+    tags: List[str]
+    url: str
+    status: ListingStatus = ListingStatus.available
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class ListingCreate(ListingBase):
     # The file will be handled separately in the endpoint
@@ -16,6 +28,7 @@ class ListingUpdate(BaseModel):
     price: Optional[float]
     description: Optional[str]
     url: Optional[AnyUrl]
+    status: Optional[ListingStatus]
 
 class ListingOut(ListingBase):
     id: str = Field(..., example="64a7c0f2b4d1f2a5c8e9f0d1")
