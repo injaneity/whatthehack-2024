@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -25,9 +24,7 @@ export default function ProductCard({
   title,
   description,
   price,
-  tags,
   url,
-  status,
   username,
 }: ProductCardProps) {
   const telegramLink = `https://telegram.me/${username}`;
