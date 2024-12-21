@@ -12,12 +12,9 @@ interface ProductCardProps {
   category: string
 }
 
-export default function ProductCard({ id, title, description, price, image, category }: ProductCardProps) {
+export default function ProductCard({title, description, price, image, category }: ProductCardProps) {
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <span className="px-5 py-10">
-          {id}
-      </span>
       <CardHeader>
         <div className="relative w-full h-48">
           <Image
@@ -38,7 +35,7 @@ export default function ProductCard({ id, title, description, price, image, cate
         <span className="text-lg font-bold">
           {price === 0 ? "Free" : `$${price}`}
         </span>
-        <Button>View Details</Button>
+        <Button>Buy</Button>
       </CardFooter>
     </Card>
   )

@@ -5,20 +5,26 @@ import Link from "next/link";
 export default function Header() {
   return (
       <header className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-gray-900">
-          College Marketplace
-        </Link>
-        <div className="flex items-center space-x-4">
-          <Button asChild>
-            <Link href="/new-listing">New Listing</Link>
-          </Button>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <Link href="/" className="text-2xl font-bold text-gray-900">
+            ishowscripts
+          </Link>
+          <div className="flex items-center">
+            <Button className="w-40" asChild>
+              <Link href="/new-listing">New Listing</Link>
+            </Button>
+            <Button className="w-40 p-0" variant="link" asChild>
+              <Link href="/my-listings">My Listings</Link>
+            </Button>
+            <Button className="w-40 p-0" variant="link" asChild>
+              <Link href="/my-purchases">My Purchases</Link>
+            </Button>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
   );
 }
 
