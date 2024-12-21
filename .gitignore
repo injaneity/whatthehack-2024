@@ -14,5 +14,6 @@ backend/venv/
 
 # FRONTEND
 frontend/node_modules
-.npm
+frontend/.npm
+frontend/.env.local
 *.tsbuildinfo
