@@ -48,32 +48,34 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
         <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">My Purchases</h1>
 
         {/* Search Bar */}
-        <form method="GET" className="mb-6 flex items-center gap-2 px-4 ">
-        <Input
-          className="flex-grow"
-          type="text"
-          name="query"
-          placeholder="Search products..."
-          defaultValue={searchQuery}
-        />
-        <Button
-          type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-        >
-          Search
-        </Button>
-      </form>
+        <form method="GET" className="mb-6 flex items-center gap-2 px-4">
+          <Input
+            className="flex-grow"
+            type="text"
+            name="query"
+            placeholder="Search products..."
+            defaultValue={searchQuery}
+          />
+          <Button
+            type="submit"
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Search
+          </Button>
+        </form>
 
-        {/* Product Grid */}
-        <div className="max-w-7xl mx-auto m-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-items-center">
-            {products.length > 0 ? (
-              products.map((product) => <ProductCard key={product.id} {...product} />)
-            ) : (
-              <p className="text-gray-700">No products found.</p>
-            )}
+        {/* Conditional Rendering */}
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-items-center">
+            {products.map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center justify-center h-[60vh]">
+            <p className="text-gray-700 text-lg">No products found.</p>
+          </div>
+        )}
       </main>
     </div>
   );
