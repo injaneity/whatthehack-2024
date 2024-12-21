@@ -12,13 +12,14 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y openssl libssl-dev
 
 # Copy project
 COPY ./app /app/app
 COPY .env /app/.env
 
-# Expose port
+# Expose the port FastAPI will run on
 EXPOSE 8000
 
-# Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Set the command to run FastAPI with your specified script
+CMD ["fastapi", "dev", "app/main.py"]

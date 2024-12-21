@@ -135,9 +135,10 @@ async def update_listing(
 @router.delete("/listings/{listing_id}", response_model=dict)
 async def delete_listing(listing_id: str):
     try:
-        result = await listing_collection.delete_one({"_id": ObjectId(listing_id)})
+        result = await listing_collection.delete_one({"id": listing_id})
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Listing not found")
         return {"message": "Listing deleted successfully"}
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail="Failed to delete listing.")
