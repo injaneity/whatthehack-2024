@@ -7,10 +7,13 @@ def extract_tags(description: str) -> List[str]:
 
 def listing_helper(listing) -> ListingOut:
     return ListingOut(
-        id=str(listing["_id"]),
+        id=listing.get("id"),
         username=listing["username"],
+        title=listing["title"],
         price=listing["price"],
         description=listing["description"],
         tags=listing["tags"],
-        url=listing.get("url")
+        url=listing.get("url"),
+        status=listing["status"],
+        created_at=listing["created_at"]  # Include created_at
     )
