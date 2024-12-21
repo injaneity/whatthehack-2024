@@ -1,15 +1,11 @@
-import { SignIn } from "@clerk/nextjs"
 import Header from "@/components/Header"
 import ProductCard from "@/components/ProductCard"
 
-// This is a mock function to simulate fetching products from an API
 async function getProducts() {
-  // In a real application, you would fetch this data from your backend
   return [
     { id: "1", title: "Textbook", description: "Intro to Computer Science", price: 30, image: "/placeholder.svg?height=200&width=200", category: "Books" },
     { id: "2", title: "Desk Lamp", description: "Adjustable LED lamp", price: 15, image: "/placeholder.svg?height=200&width=200", category: "Furniture" },
-    { id: "3", title: "Backpack", description: "Lightly used backpack", price: "Free", image: "/placeholder.svg?height=200&width=200", category: "Accessories" },
-    // Add more mock products as needed
+    { id: "3", title: "Backpack", description: "Lightly used backpack", price: 0, image: "/placeholder.svg?height=200&width=200", category: "Accessories" },
   ]
 }
 
