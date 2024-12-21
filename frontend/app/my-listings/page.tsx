@@ -2,12 +2,33 @@ import Header from "@/components/Header"
 import ProductCard from "@/components/ProductCard"
 
 async function getProducts() {
-  return [
-    { id: "1", title: "Textbook", description: "Intro to Computer Science", price: 30, image: "/placeholder.svg?height=200&width=200", category: "Books" },
-    { id: "2", title: "Desk Lamp", description: "Adjustable LED lamp", price: 15, image: "/placeholder.svg?height=200&width=200", category: "Furniture" },
-    { id: "3", title: "Backpack", description: "Lightly used backpack", price: 0, image: "/placeholder.svg?height=200&width=200", category: "Accessories" },
-  ]
-}
+    return [
+      {
+        id: "1",
+        title: "Textbook",
+        description: "Intro to Computer Science",
+        price: 30,
+        image: ["@/components/icons/image1.jpg", "@/components/icons/image2.jpg"],
+        category: "Books",
+      },
+      {
+        id: "2",
+        title: "Desk Lamp",
+        description: "Adjustable LED lamp",
+        price: 15,
+        image: ["/image3.jpg", "/image4.jpg"],
+        category: "Furniture",
+      },
+      {
+        id: "3",
+        title: "Backpack",
+        description: "Lightly used backpack",
+        price: 0,
+        image: ["/image5.jpg", "/image6.jpg"],
+        category: "Accessories",
+      },
+    ];
+  }
 
 export default async function Home() {
   const products = await getProducts()
