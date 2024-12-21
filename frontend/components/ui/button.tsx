@@ -10,6 +10,7 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
+                link: 'underline-offset-4 hover:underline',
                 default:
                     'bg-[#F5D143] border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none dark:hover:shadow-none',
                 noShadow: 'bg-main border-2 border-border dark:border-darkBorder',
