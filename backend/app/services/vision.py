@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+import json
 
 def get_tags(file_url):
     load_dotenv()
@@ -29,4 +30,4 @@ def get_tags(file_url):
 
     tags_str = response.choices[0].message.content.strip().split("\n")
     print("tags_str: ",tags_str)
-    return tags_str[1]
+    return json.loads(tags_str[1])

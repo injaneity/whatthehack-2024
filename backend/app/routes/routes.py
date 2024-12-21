@@ -49,6 +49,7 @@ async def create_listing(
         new_listing = await listing_collection.find_one({"_id": result.inserted_id})
         return listing_helper(new_listing)
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail="Failed to create listing.")
 
 @router.get("/listings/", response_model=List[ListingOut])
