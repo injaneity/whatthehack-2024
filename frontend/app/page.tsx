@@ -8,6 +8,9 @@ import { Input } from "@/components/ui/input";
 import allProducts from "@/public/data.json";
 import { useUser } from "@clerk/clerk-react";
 
+import ListingList from '../components/ListingList';
+
+
 function filterProducts(searchQuery: string | undefined, currentUsername: string) {
   if (!searchQuery) {
     return allProducts.filter((product) => {
@@ -44,6 +47,7 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
   return (
     <div className="min-h-screen bg-[#F6F3E8]">
       <Header />
+      <ListingList />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">Marketplace</h1>
 
