@@ -120,7 +120,7 @@ export default function Home({
       <Header />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">Marketplace</h1>
-        <div className="flex flex-row flex-wrap gap-4 justify-start w-full">
+        <div className="flex flex-row flex-wrap gap-3 justify-start w-full">
           <div className="pl-4 pb-3">
             <Select onValueChange={(value) => setSortOption(value)} defaultValue="new-to-old">
               <SelectTrigger className="w-[180px] bg-[#5964C6] text-white rounded-lg">
@@ -143,7 +143,7 @@ export default function Home({
           {/* Search Bar */}
           <form
             method="GET"
-            className="mb-6 flex flex-grow items-center gap-2 px-4"
+            className="mb-6 flex flex-grow items-center gap-3 pr-4"
           >
             <Input
               className="flex-grow"
@@ -155,6 +155,7 @@ export default function Home({
             <Button
               type="submit"
               className="px-4 py-2 bg-[#5964C6] text-white rounded-lg hover:bg-[#3A3F74]"
+              variant="reverse"
             >
               Search
             </Button>
