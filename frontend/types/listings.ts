@@ -27,7 +27,7 @@ export interface Listing {
   }
   
   export interface UpdateListingData {
-    username:string;
+    username?:string;
     buyer_username?: string;
     title?: string;
     price?: number;
