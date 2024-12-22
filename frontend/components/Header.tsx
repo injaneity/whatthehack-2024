@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from 'next/image';
 import Map from '@/components/ui/map'
-import { TbMap2 } from 'react-icons/tb';
 
 import {
   Dialog,
@@ -31,7 +30,6 @@ export default function Header() {
   const [progress, setProgress] = React.useState(330); // Example points value
   const [voucherCode, setVoucherCode] = React.useState(""); // State for voucher code
 
-  // Calculate dynamic bounds for the progress bar
   const lowerBound = Math.floor(progress / 100) * 100;
   const upperBound = lowerBound + 100;
   const progressPercentage = ((progress - lowerBound) / (upperBound - lowerBound)) * 100;

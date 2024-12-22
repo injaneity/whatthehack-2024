@@ -38,14 +38,6 @@ export default function ProductCard({
   const [showTelegramButton, setShowTelegramButton] = useState(true);
   const [status, setStatus] = useState(initialStatus);
 
-  const [formData, setFormData] = useState({
-    username: user?.username ?? '',
-    title: '',
-    price: undefined,
-    description: '',
-    status: undefined,
-  });
-
   useEffect(() => {
     if (username === currentUsername) {
       setShowTelegramButton(false);
