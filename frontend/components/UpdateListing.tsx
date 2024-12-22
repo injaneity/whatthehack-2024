@@ -50,7 +50,6 @@ const UpdateListing: React.FC<UpdateListingProps> = ({ listingId }) => {
       const response = await updateListing(listingId, updatedData);
       console.log('Listing updated:', response);
       alert('Listing updated successfully!');
-      // console.log(updatedData);
 
     } catch (error) {
       console.error('Error updating listing:', error);

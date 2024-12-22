@@ -30,12 +30,13 @@ export default function ProductCard({
   price,
   url,
   username,
-  status,
+  status: initialStatus,
 }: ProductCardProps) {
   const telegramLink = `https://telegram.me/${username}`;
   const { user } = useUser();
   const currentUsername = user?.username ?? "";
   const [showTelegramButton, setShowTelegramButton] = useState(true);
+  const [status, setStatus] = useState(initialStatus);
 
   useEffect(() => {
     if (username === currentUsername) {
@@ -67,7 +68,17 @@ export default function ProductCard({
         username: currentUsername,
         buyerUsername: username !== currentUsername ? currentUsername : undefined,
       };
-      await updateListing(id, data); // Reuse the imported function
+
+      // Call API to update the listing
+      await updateListing(id, data);
+
+      // Update the status dynamically
+      if (username !== currentUsername) {
+        setStatus("reserved"); // Set to "reserved" when reserved by a buyer
+      } else if (status === "reserved") {
+        setStatus("completed"); // Set to "completed" when completing the purchase
+      }
+
       console.log("Listing successfully updated");
     } catch (error) {
       console.error("Error updating listing:", error);
