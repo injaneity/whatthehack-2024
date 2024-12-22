@@ -2,6 +2,8 @@ import { SignedIn, UserButton } from '@clerk/nextjs';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from 'next/image';
+import Map from '@/components/ui/map'
+import { TbMap2 } from 'react-icons/tb';
 
 import {
   Dialog,
@@ -76,11 +78,22 @@ export default function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 pr-6">
           <Button className="w-40 text-lg font-bold" variant="default" asChild>
             <Link href="/new-listing">New Listing</Link>
           </Button>
         </div>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="pl-8 pr-8 text-lg font-bold text-red-700 flex items-center">
+              Donate
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <Map/>
+          </DialogContent>
+        </Dialog>
 
         <Dialog>
           <DialogTrigger asChild>
