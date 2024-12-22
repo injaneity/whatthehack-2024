@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function sortProducts(listings:Listing[], sortOption: string) {
+function sortProducts(listings: Listing[], sortOption: string) {
   if (sortOption === "a-z") {
     return listings.sort((a, b) =>
       a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
@@ -34,11 +34,13 @@ function sortProducts(listings:Listing[], sortOption: string) {
     return [...listings].sort((a, b) => b.price - a.price);
   } else if (sortOption === "new-to-old") {
     return [...listings].sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   } else if (sortOption === "old-to-new") {
     return [...listings].sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     );
   }
   return listings;
@@ -99,38 +101,63 @@ export default function Home({
 
   useEffect(() => {
     const initializeProducts = () => {
-      const filteredProducts = filterProducts(searchQuery, currentUsername, listings);
+      const filteredProducts = filterProducts(
+        searchQuery,
+        currentUsername,
+        listings
+      );
       const sortedProducts = sortProducts(filteredProducts, sortOption);
       setProducts(sortedProducts);
     };
-  
+
     if (!loading) {
       initializeProducts(); // Ensure this runs when `listings` is loaded
     }
   }, [searchQuery, currentUsername, sortOption, listings, loading]);
 
-  if (loading) return <p>Loading...</p>;
-
+  if (loading)
+    return (
+      <p className="text-gray-700 text-3xl font-bold flex items-center justify-center h-[50vh]">
+        Loading...
+      </p>
+    );
   return (
     <div className="min-h-screen bg-[#F6F3E8]">
       <Header />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">My Listings</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">
+          My Listings
+        </h1>
         <div className="flex flex-row flex-wrap gap-4 justify-start w-full">
           <div className="pl-4 pb-3">
-            <Select onValueChange={(value) => setSortOption(value)} defaultValue="new-to-old">
+            <Select
+              onValueChange={(value) => setSortOption(value)}
+              defaultValue="new-to-old"
+            >
               <SelectTrigger className="w-[180px] bg-[#5964C6] text-white rounded-lg">
                 <SelectValue placeholder="Sort" />
               </SelectTrigger>
               <SelectContent className="bg-[#5964C6]">
                 <SelectGroup className="text-white rounded-lg">
                   <SelectLabel className="text-white">Sort by</SelectLabel>
-                  <SelectItem value="a-z" className="text-white">A-Z</SelectItem>
-                  <SelectItem value="z-a" className="text-white">Z-A</SelectItem>
-                  <SelectItem value="price-low-high" className="text-white">Price: Low to High</SelectItem>
-                  <SelectItem value="price-high-low" className="text-white">Price: High to Low</SelectItem>
-                  <SelectItem value="new-to-old" className="text-white">New to Old</SelectItem>
-                  <SelectItem value="old-to-new" className="text-white">Old to New</SelectItem>
+                  <SelectItem value="a-z" className="text-white">
+                    A-Z
+                  </SelectItem>
+                  <SelectItem value="z-a" className="text-white">
+                    Z-A
+                  </SelectItem>
+                  <SelectItem value="price-low-high" className="text-white">
+                    Price: Low to High
+                  </SelectItem>
+                  <SelectItem value="price-high-low" className="text-white">
+                    Price: High to Low
+                  </SelectItem>
+                  <SelectItem value="new-to-old" className="text-white">
+                    New to Old
+                  </SelectItem>
+                  <SelectItem value="old-to-new" className="text-white">
+                    Old to New
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
