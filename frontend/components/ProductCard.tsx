@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
+import { updateListing } from "@/api/listings";
 
 interface ProductCardProps {
   id: string;
@@ -23,24 +24,26 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({
+  id,
   title,
   description,
   price,
   url,
   username,
-  status,
+  status: initialStatus,
 }: ProductCardProps) {
   const telegramLink = `https://telegram.me/${username}`;
   const { user } = useUser();
   const currentUsername = user?.username ?? "";
   const [showTelegramButton, setShowTelegramButton] = useState(true);
+  const [status, setStatus] = useState(initialStatus);
 
   useEffect(() => {
     if (username === currentUsername) {
       setShowTelegramButton(false);
     }
   }, [username, currentUsername]);
-  
+
   const buttonText = () => {
     if (username == currentUsername) {
       if (status == "reserved") {
@@ -56,6 +59,29 @@ export default function ProductCard({
         return "Completed";
       }
       return "Reserve";
+    }
+  };
+
+  const handleButtonClick = async () => {
+    try {
+      const data = {
+        username: currentUsername,
+        buyerUsername: username !== currentUsername ? currentUsername : undefined,
+      };
+
+      // Call API to update the listing
+      await updateListing(id, data);
+
+      // Update the status dynamically
+      if (username !== currentUsername) {
+        setStatus("reserved"); // Set to "reserved" when reserved by a buyer
+      } else if (status === "reserved") {
+        setStatus("completed"); // Set to "completed" when completing the purchase
+      }
+
+      console.log("Listing successfully updated");
+    } catch (error) {
+      console.error("Error updating listing:", error);
     }
   };
 
@@ -94,7 +120,7 @@ export default function ProductCard({
               />
             </a>
           )}
-          <Button>{buttonText()}</Button>
+          <Button onClick={handleButtonClick}>{buttonText()}</Button>
         </div>
       </CardFooter>
     </Card>
