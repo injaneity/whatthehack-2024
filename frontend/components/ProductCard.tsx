@@ -38,6 +38,14 @@ export default function ProductCard({
   const [showTelegramButton, setShowTelegramButton] = useState(true);
   const [status, setStatus] = useState(initialStatus);
 
+  const [formData, setFormData] = useState({
+    username: user?.username ?? '',
+    title: '',
+    price: undefined,
+    description: '',
+    status: undefined,
+  });
+
   useEffect(() => {
     if (username === currentUsername) {
       setShowTelegramButton(false);
@@ -64,22 +72,28 @@ export default function ProductCard({
 
   const handleButtonClick = async () => {
     try {
-      const data = {
-        username: currentUsername,
-        buyerUsername: username !== currentUsername ? currentUsername : undefined,
-      };
-
-      // Call API to update the listing
-      await updateListing(id, data);
-
-      // Update the status dynamically
       if (username !== currentUsername) {
-        setStatus("reserved"); // Set to "reserved" when reserved by a buyer
-      } else if (status === "reserved") {
-        setStatus("completed"); // Set to "completed" when completing the purchase
-      }
+        // Update the listing to "reserved" when reserved by a buyer
+        const updatedData = {
+          username: currentUsername,
+          buyer_username: currentUsername,
+          status: "reserved",
+        };
 
-      console.log("Listing successfully updated");
+        const response = await updateListing(id, updatedData);
+        setStatus("reserved");
+        console.log("Listing successfully updated to reserved", response);
+      } else if (status === "reserved") {
+        // Update the listing to "completed" when completing the purchase
+        const updatedData = {
+          username: currentUsername,
+          status: "completed",
+        };
+
+        const response = await updateListing(id, updatedData);
+        setStatus("completed");
+        console.log("Listing successfully updated to completed", response);
+      }
     } catch (error) {
       console.error("Error updating listing:", error);
     }
