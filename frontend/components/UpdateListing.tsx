@@ -44,7 +44,7 @@ const UpdateListing: React.FC<UpdateListingProps> = ({ listingId }) => {
     try {
       // Ensure all existing form values are sent, even if unmodified
       const updatedData = Object.fromEntries(
-        Object.entries(formData).filter(([_, v]) => v !== undefined && v !== '')
+        Object.entries(formData).filter(([v]) => v !== undefined && v !== '')
       ) as UpdateListingData;
 
       const response = await updateListing(listingId, updatedData);

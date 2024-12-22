@@ -4,7 +4,6 @@ import { createListing } from '@/api/listings';
 import { formatCreateListingData } from '@/utils/formatData';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { Form } from './ui/form';
 import { Button } from './ui/button';
 import Header from './Header';
 import { Card } from './ui/card';
