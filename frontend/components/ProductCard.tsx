@@ -11,6 +11,7 @@ import {
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { updateListing } from "@/api/listings";
+import { UpdateListingData } from "@/types/listings";
 
 interface ProductCardProps {
   id: string;
@@ -21,6 +22,12 @@ interface ProductCardProps {
   url: string;
   status: string;
   username: string;
+}
+
+export enum Status {
+  Available = "available",
+  Reserved = "reserved",
+  Complete = "complete",
 }
 
 export default function ProductCard({
@@ -46,50 +53,48 @@ export default function ProductCard({
 
   const buttonText = () => {
     if (username == currentUsername) {
-      if (status == "reserved") {
-        return "Reserved";
-      } else if (status == "completed") {
-        return "Completed";
-      }
-      return "Available";
+        if (status == Status.Reserved) {
+            return "Reserved";
+        } else if (status == Status.Complete) {
+            return "Complete";
+        }
+        return "Available";
     } else {
-      if (status == "reserved") {
-        return "Complete Purchase";
-      } else if (status == "completed") {
-        return "Completed";
-      }
-      return "Reserve";
+        if (status == Status.Reserved) {
+            return "Complete Purchase";
+        } else if (status == Status.Complete) {
+            return "Complete";
+        }
+        return "Reserve";
     }
-  };
+};
 
-  const handleButtonClick = async () => {
-    try {
+const handleButtonClick = async () => {
+  try {
       if (username !== currentUsername) {
-        // Update the listing to "reserved" when reserved by a buyer
-        const updatedData = {
-          username: currentUsername,
-          buyer_username: currentUsername,
-          status: "reserved",
-        };
+          const updatedData: UpdateListingData = {
+              username: currentUsername,
+              buyer_username: currentUsername,
+              status: Status.Reserved,
+          };
 
-        const response = await updateListing(id, updatedData);
-        setStatus("reserved");
-        console.log("Listing successfully updated to reserved", response);
-      } else if (status === "reserved") {
-        // Update the listing to "completed" when completing the purchase
-        const updatedData = {
-          username: currentUsername,
-          status: "completed",
-        };
+          const response = await updateListing(id, updatedData);
+          setStatus(Status.Reserved);
+          console.log("Listing successfully updated to reserved", response);
+      } else if (status === Status.Reserved) {
+          const updatedData: UpdateListingData = {
+              username: currentUsername,
+              status: Status.Complete,
+          };
 
-        const response = await updateListing(id, updatedData);
-        setStatus("completed");
-        console.log("Listing successfully updated to completed", response);
+          const response = await updateListing(id, updatedData);
+          setStatus(Status.Complete);
+          console.log("Listing successfully updated to complete", response);
       }
-    } catch (error) {
+  } catch (error) {
       console.error("Error updating listing:", error);
-    }
-  };
+  }
+};
 
   return (
     <Card className="w-[350px] flex flex-col">
