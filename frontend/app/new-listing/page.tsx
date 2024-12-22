@@ -71,7 +71,7 @@ export default function NewListing() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#F6F3E8]">
       <Header />
       <main className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
       <Card>
