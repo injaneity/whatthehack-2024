@@ -98,17 +98,16 @@ export default function Home({
   }, []);
 
   useEffect(() => {
-    if (currentUsername) {
-      // Ensure `currentUsername` is not empty
-      const filteredProducts = filterProducts(
-        searchQuery,
-        currentUsername,
-        listings
-      );
+    const initializeProducts = () => {
+      const filteredProducts = filterProducts(searchQuery, currentUsername, listings);
       const sortedProducts = sortProducts(filteredProducts, sortOption);
       setProducts(sortedProducts);
+    };
+  
+    if (!loading) {
+      initializeProducts(); // Ensure this runs when `listings` is loaded
     }
-  }, [searchQuery, currentUsername, sortOption]);
+  }, [searchQuery, currentUsername, sortOption, listings, loading]);
 
   if (loading) return <p>Loading...</p>;
 
