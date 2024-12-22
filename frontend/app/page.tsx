@@ -1,6 +1,9 @@
 import Header from "@/components/Header"
 import ProductCard from "@/components/ProductCard"
 
+import ListingList from '../components/ListingList';
+
+
 async function getProducts() {
   return [
     { id: "1", title: "Textbook", description: "Intro to Computer Science", price: 30, image: "/placeholder.svg?height=200&width=200", category: "Books" },
@@ -15,6 +18,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
+      <ListingList />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Available Listings</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

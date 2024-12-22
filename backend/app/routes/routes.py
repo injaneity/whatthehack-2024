@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
-from typing import List
+from typing import List, Optional
 from bson.objectid import ObjectId
 
 from app.models.models import ListingOut, ListingStatus, ListingUpdate
@@ -102,29 +102,38 @@ async def get_listings_by_buyer(username: str):
         print(f"Error retrieving listings by buyer: {e}")
         raise HTTPException(status_code=500, detail="Failed to retrieve listings.")
 
-
-from fastapi import Form
-
 @router.put("/listings/{listing_id}", response_model=ListingOut)
 async def update_listing(
     listing_id: str,
-    username: str = Form(...),  # Accept username as form data
-    buyer_username: str = Form(...)  # Accept buyer_username as form data
+    username: Optional[str] = Form(None),  # Make fields optional
+    buyer_username: Optional[str] = Form(None),
+    title: Optional[str] = Form(None),
+    price: Optional[float] = Form(None),
+    description: Optional[str] = Form(None),
+    status: Optional[str] = Form(None)
 ):
     try:
         update_data = {
             "username": username,
-            "buyer_username": buyer_username
+            "buyer_username": buyer_username,
+            "title": title,
+            "price": price,
+            "description": description,
+            "status": status
         }
 
-        # Update the listing in the database
+        update_data = {key: value for key, value in update_data.items() if value is not None}
+
+        if not update_data:
+            raise HTTPException(status_code=400, detail="No valid fields to update.")
+
         result = await listing_collection.update_one(
             {"id": listing_id},
             {"$set": update_data}
         )
         if result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Listing not found")
-        
+
         updated_listing = await listing_collection.find_one({"id": listing_id})
         return listing_helper(updated_listing)
     except Exception as e:
@@ -132,10 +141,11 @@ async def update_listing(
 
 
 
+
 @router.delete("/listings/{listing_id}", response_model=dict)
 async def delete_listing(listing_id: str):
     try:
-        result = await listing_collection.delete_one({"_id": ObjectId(listing_id)})
+        result = await listing_collection.delete_one({"id": listing_id})
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Listing not found")
         return {"message": "Listing deleted successfully"}
