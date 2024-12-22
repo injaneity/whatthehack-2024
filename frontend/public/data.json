@@ -1,6 +1,7 @@
 [
     {
         "username": "kaedenlim",
+        "buyer_username": "lucaswyl",
         "title": "sample",
         "price": 5.0,
         "description": "test test",
@@ -8,12 +9,13 @@
             "yeah"
         ],
         "url": "https://wth-2024.s3.ap-southeast-1.amazonaws.com/b6812bff779143da99183550e9f38a8b_alibabacheck.png",
-        "status": "available",
+        "status": "reserved",
         "created_at": "2024-12-21T13:20:34.963000",
         "id": "eed9e2f5-5c26-481f-b2e8-10841e439ee5"
     },
     {
         "username": "lucaswyl",
+        "buyer_username": "kaedenlim",
         "title": "LED Desk Lamp",
         "price": 15.0,
         "description": "A modern LED desk lamp with adjustable brightness.",
@@ -28,6 +30,7 @@
     },
     {
         "username": "izacdy",
+        "buyer_username": "anikahandigol",
         "title": "Vintage Backpack",
         "price": 25.0,
         "description": "A lightly used vintage backpack, perfect for daily use.",
@@ -36,12 +39,13 @@
             "vintage"
         ],
         "url": "/assets/image1.jpg",
-        "status": "available",
+        "status": "reserved",
         "created_at": "2024-12-18T09:30:00.000000",
         "id": "8cd3b789-6784-42bd-a432-7d12e6a93456"
     },
     {
-        "username": "johnsmith",
+        "username": "anikahandigol",
+        "buyer_username": "izacdy",
         "title": "Bluetooth Headphones",
         "price": 50.0,
         "description": "Noise-cancelling Bluetooth headphones with superior sound quality.",
@@ -55,7 +59,8 @@
         "id": "5678abcd-1234-4f56-9e78-90123efg4567"
     },
     {
-        "username": "alexlee",
+        "username": "anikahandigol",
+        "buyer_username": "",
         "title": "Baking Set",
         "price": 10.0,
         "description": "A set of baking tools including measuring cups and a whisk.",
@@ -70,6 +75,7 @@
     },
     {
         "username": "sophiakim",
+        "buyer_username": "anikahandigol",
         "title": "Ceramic Plant Pot",
         "price": 12.0,
         "description": "A minimalist ceramic plant pot for indoor plants.",

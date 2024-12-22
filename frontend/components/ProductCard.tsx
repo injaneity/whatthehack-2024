@@ -1,13 +1,15 @@
 "use client";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
+import { useUser } from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
 
 interface ProductCardProps {
   id: string;
@@ -26,8 +28,36 @@ export default function ProductCard({
   price,
   url,
   username,
+  status,
 }: ProductCardProps) {
   const telegramLink = `https://telegram.me/${username}`;
+  const { user } = useUser();
+  const currentUsername = user?.username ?? "";
+  const [showTelegramButton, setShowTelegramButton] = useState(true);
+
+  useEffect(() => {
+    if (username === currentUsername) {
+      setShowTelegramButton(false);
+    }
+  }, [username, currentUsername]);
+  
+  const buttonText = () => {
+    if (username == currentUsername) {
+      if (status == "reserved") {
+        return "Reserved";
+      } else if (status == "completed") {
+        return "Completed";
+      }
+      return "Available";
+    } else {
+      if (status == "reserved") {
+        return "Complete Purchase";
+      } else if (status == "completed") {
+        return "Completed";
+      }
+      return "Reserve";
+    }
+  };
 
   return (
     <Card className="w-[350px] flex flex-col">
@@ -45,24 +75,26 @@ export default function ProductCard({
 
       <CardFooter className="flex justify-between items-center gap-3 mt-auto">
         <span className="text-lg font-bold">
-          {price === 0 ? 'Free' : `$${price}`}
+          {price === 0 ? "Free" : `$${price}`}
         </span>
         <div className="flex items-center gap-3">
-          <a
-            className="inline-block"
-            href={telegramLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/assets/telegram.png"
-              alt="Contact on Telegram"
-              width={40}
-              height={40}
-              className="cursor-pointer"
-            />
-          </a>
-          <Button>Reserve</Button>
+          {showTelegramButton && (
+            <a
+              className="inline-block"
+              href={telegramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/assets/telegram.png"
+                alt="Contact on Telegram"
+                width={40}
+                height={40}
+                className="cursor-pointer"
+              />
+            </a>
+          )}
+          <Button>{buttonText()}</Button>
         </div>
       </CardFooter>
     </Card>
