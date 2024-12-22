@@ -6,7 +6,6 @@ import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@clerk/clerk-react";
-//import ListingList from "../components/ListingList";
 import { Listing } from "@/types/listings";
 import { getAllListings } from "@/api/listings";
 
