@@ -86,18 +86,18 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
         <div className="flex flex-row flex-wrap gap-4 justify-start w-full">
           <div className="pl-4 pb-3">
             <Select onValueChange={(value) => setSortOption(value)} defaultValue="new-to-old">
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[180px] bg-[#5964C6] text-white rounded-lg">
                 <SelectValue placeholder="Sort" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Sort by</SelectLabel>
-                  <SelectItem value="a-z">A-Z</SelectItem>
-                  <SelectItem value="z-a">Z-A</SelectItem>
-                  <SelectItem value="price-low-high">Price: Low to High</SelectItem>
-                  <SelectItem value="price-high-low">Price: High to Low</SelectItem>
-                  <SelectItem value="new-to-old">New to Old</SelectItem>
-                  <SelectItem value="old-to-new">Old to New</SelectItem>
+              <SelectContent className="bg-[#5964C6]">
+                <SelectGroup className="text-white rounded-lg">
+                  <SelectLabel className="text-white">Sort by</SelectLabel>
+                  <SelectItem value="a-z" className="text-white">A-Z</SelectItem>
+                  <SelectItem value="z-a" className="text-white">Z-A</SelectItem>
+                  <SelectItem value="price-low-high" className="text-white">Price: Low to High</SelectItem>
+                  <SelectItem value="price-high-low" className="text-white">Price: High to Low</SelectItem>
+                  <SelectItem value="new-to-old" className="text-white">New to Old</SelectItem>
+                  <SelectItem value="old-to-new" className="text-white">Old to New</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
