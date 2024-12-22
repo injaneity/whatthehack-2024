@@ -1,3 +1,10 @@
+export enum Status {
+    Available = "available",
+    Reserved = "reserved",
+    Complete = "complete",
+}
+
+
 export interface Listing {
     id: string;
     username: string;
@@ -7,7 +14,7 @@ export interface Listing {
     description: string;
     tags: string[];
     url: string;
-    status: 'available' | 'reserved' | 'complete';
+    status: Status;
     createdAt: string;
   }
   
@@ -21,9 +28,10 @@ export interface Listing {
   
   export interface UpdateListingData {
     username:string;
+    buyer_username?: string;
     title?: string;
     price?: number;
     description?: string;
-    status?: 'available' | 'reserved' | 'complete';
+    status?: Status;
   }
   

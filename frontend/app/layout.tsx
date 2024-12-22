@@ -1,7 +1,6 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import { neobrutalism } from '@clerk/themes';
 import './globals.css';
-import { BrowserRouter } from 'react-router-dom';
 
 export const metadata = {
   title: 'College Marketplace',
