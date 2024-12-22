@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
+import { updateListing } from "@/api/listings";
 
 interface ProductCardProps {
   id: string;
@@ -23,6 +24,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({
+  id,
   title,
   description,
   price,
@@ -40,7 +42,7 @@ export default function ProductCard({
       setShowTelegramButton(false);
     }
   }, [username, currentUsername]);
-  
+
   const buttonText = () => {
     if (username == currentUsername) {
       if (status == "reserved") {
@@ -56,6 +58,19 @@ export default function ProductCard({
         return "Completed";
       }
       return "Reserve";
+    }
+  };
+
+  const handleButtonClick = async () => {
+    try {
+      const data = {
+        username: currentUsername,
+        buyerUsername: username !== currentUsername ? currentUsername : undefined,
+      };
+      await updateListing(id, data); // Reuse the imported function
+      console.log("Listing successfully updated");
+    } catch (error) {
+      console.error("Error updating listing:", error);
     }
   };
 
@@ -94,7 +109,7 @@ export default function ProductCard({
               />
             </a>
           )}
-          <Button>{buttonText()}</Button>
+          <Button onClick={handleButtonClick}>{buttonText()}</Button>
         </div>
       </CardFooter>
     </Card>

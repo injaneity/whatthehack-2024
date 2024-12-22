@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import allProducts from "@/public/data.json";
 import { useUser } from "@clerk/clerk-react";
 
-function filterProducts(searchQuery: string | undefined, currentUsername: string) {
+function filterProducts(searchQuery: string | undefined, currentUsername: string,) {
   if (!searchQuery) {
     return allProducts.filter((product) => {
       return product.buyer_username == currentUsername && product.status == "reserved";
