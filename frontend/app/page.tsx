@@ -53,7 +53,7 @@ function filterProducts(
   if (!searchQuery) {
     return listings.filter((listing) => {
       return (
-        listing.username !== currentUsername && listing.status !== "reserved"
+        listing.status !== "complete" && listing.status !== "reserved" && listing.username !== currentUsername
       );
     });
   }
@@ -61,13 +61,13 @@ function filterProducts(
   const lowerCaseQuery = searchQuery.toLowerCase();
 
   return listings.filter((listing) => {
-    const matchesUsername = listing.username !== currentUsername;
+    const isNotComplete = listing.status !== "complete";
     const isNotReserved = listing.status !== "reserved";
     const matchesQuery =
       listing.title.toLowerCase().includes(lowerCaseQuery) ||
       listing.description.toLowerCase().includes(lowerCaseQuery) ||
       listing.tags.some((tag) => tag.toLowerCase().includes(lowerCaseQuery));
-    return matchesUsername && isNotReserved && matchesQuery;
+    return isNotComplete && isNotReserved && listing.username !== currentUsername && matchesQuery;
   });
 }
 

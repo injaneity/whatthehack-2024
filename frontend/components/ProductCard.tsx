@@ -71,9 +71,8 @@ export default function ProductCard({
 
 const handleButtonClick = async () => {
   try {
-      if (username !== currentUsername) {
+      if (username !== currentUsername && Status.Available) {
           const updatedData: UpdateListingData = {
-              username: currentUsername,
               buyer_username: currentUsername,
               status: Status.Reserved,
           };
@@ -81,9 +80,8 @@ const handleButtonClick = async () => {
           const response = await updateListing(id, updatedData);
           setStatus(Status.Reserved);
           console.log("Listing successfully updated to reserved", response);
-      } else if (status === Status.Reserved) {
+      } else if (username !== currentUsername && Status.Reserved) {
           const updatedData: UpdateListingData = {
-              username: currentUsername,
               status: Status.Complete,
           };
 
