@@ -9,6 +9,41 @@ import { useUser } from "@clerk/clerk-react";
 import { Listing } from "@/types/listings";
 import { getAllListings } from "@/api/listings";
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+function sortProducts(listings:Listing[], sortOption: string) {
+  if (sortOption === "a-z") {
+    return listings.sort((a, b) =>
+      a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+    );
+  } else if (sortOption === "z-a") {
+    return [...listings].sort((a, b) =>
+      b.title.localeCompare(a.title, undefined, { sensitivity: "base" })
+    );
+  } else if (sortOption === "price-low-high") {
+    return [...listings].sort((a, b) => a.price - b.price);
+  } else if (sortOption === "price-high-low") {
+    return [...listings].sort((a, b) => b.price - a.price);
+  } else if (sortOption === "new-to-old") {
+    return [...listings].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  } else if (sortOption === "old-to-new") {
+    return [...listings].sort(
+      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    );
+  }
+  return listings;
+}
+
 function filterProducts(
   searchQuery: string | undefined,
   currentUsername: string,
@@ -41,6 +76,7 @@ export default function Home({
   const currentUsername = user?.username ?? ""; // Retrieve the current user's username
   const [products, setProducts] = useState<Listing[]>();
   const searchQuery = searchParams.query || ""; // Extract the search query from searchParams
+  const [sortOption, setSortOption] = useState("new-to-old"); // Default to "New to Old"
 
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -69,9 +105,10 @@ export default function Home({
         currentUsername,
         listings
       );
-      setProducts(filteredProducts);
+      const sortedProducts = sortProducts(filteredProducts, sortOption);
+      setProducts(sortedProducts);
     }
-  }, [searchQuery, currentUsername]); // Depend on `currentUsername` and `searchQuery`
+  }, [searchQuery, currentUsername, sortOption]);
 
   if (loading) return <p>Loading...</p>;
 
@@ -79,26 +116,47 @@ export default function Home({
     <div className="min-h-screen bg-[#F6F3E8]">
       <Header />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">
-          My Listings
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">My Listings</h1>
+        <div className="flex flex-row flex-wrap gap-4 justify-start w-full">
+          <div className="pl-4 pb-3">
+            <Select onValueChange={(value) => setSortOption(value)} defaultValue="new-to-old">
+              <SelectTrigger className="w-[180px] bg-[#5964C6] text-white rounded-lg">
+                <SelectValue placeholder="Sort" />
+              </SelectTrigger>
+              <SelectContent className="bg-[#5964C6]">
+                <SelectGroup className="text-white rounded-lg">
+                  <SelectLabel className="text-white">Sort by</SelectLabel>
+                  <SelectItem value="a-z" className="text-white">A-Z</SelectItem>
+                  <SelectItem value="z-a" className="text-white">Z-A</SelectItem>
+                  <SelectItem value="price-low-high" className="text-white">Price: Low to High</SelectItem>
+                  <SelectItem value="price-high-low" className="text-white">Price: High to Low</SelectItem>
+                  <SelectItem value="new-to-old" className="text-white">New to Old</SelectItem>
+                  <SelectItem value="old-to-new" className="text-white">Old to New</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Search Bar */}
-        <form method="GET" className="mb-6 flex items-center gap-2 px-4">
-          <Input
-            className="flex-grow"
-            type="text"
-            name="query"
-            placeholder="Search products..."
-            defaultValue={searchQuery}
-          />
-          <Button
-            type="submit"
-            className="px-4 py-2 bg-[#5964C6] text-white rounded-lg hover:bg-[#3A3F74]"
+          {/* Search Bar */}
+          <form
+            method="GET"
+            className="mb-6 flex flex-grow items-center gap-2 px-4"
           >
-            Search
-          </Button>
-        </form>
+            <Input
+              className="flex-grow"
+              type="text"
+              name="query"
+              placeholder="Search products..."
+              defaultValue={searchQuery}
+            />
+            <Button
+              type="submit"
+              className="px-4 py-2 bg-[#5964C6] text-white rounded-lg hover:bg-[#3A3F74]"
+            >
+              Search
+            </Button>
+          </form>
+        </div>
 
         {/* Conditional Rendering */}
         {products && products.length > 0 ? (
