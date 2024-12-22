@@ -11,20 +11,20 @@ import { useUser } from "@clerk/clerk-react";
 function filterProducts(searchQuery: string | undefined, currentUsername: string) {
   if (!searchQuery) {
     return allProducts.filter((product) => {
-      return product.username !== currentUsername && product.status !== "reserved";
+      return product.buyer_username == currentUsername && product.status == "reserved";
     });
   }
 
   const lowerCaseQuery = searchQuery.toLowerCase();
 
   return allProducts.filter((product) => {
-    const matchesUsername = product.username !== currentUsername;
-    const isNotReserved = product.status !== "reserved";
+    const matchesUsername = product.buyer_username == currentUsername;
+    const isReserved = product.status == "reserved";
     const matchesQuery =
       product.title.toLowerCase().includes(lowerCaseQuery) ||
       product.description.toLowerCase().includes(lowerCaseQuery) ||
       product.tags.some((tag) => tag.toLowerCase().includes(lowerCaseQuery));
-    return matchesUsername && isNotReserved && matchesQuery;
+    return matchesUsername && isReserved && matchesQuery;
   });
 }
 
