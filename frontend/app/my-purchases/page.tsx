@@ -82,7 +82,7 @@ export default function Home({ searchParams }: { searchParams: Record<string, st
     <div className="min-h-screen bg-[#F6F3E8]">
       <Header />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">Marketplace</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6 px-4">My Purchases</h1>
         <div className="flex flex-row flex-wrap gap-4 justify-start w-full">
           <div className="pl-4 pb-3">
             <Select onValueChange={(value) => setSortOption(value)} defaultValue="new-to-old">
