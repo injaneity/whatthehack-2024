@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import Header from "@/components/Header"
 
@@ -21,16 +20,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Card } from '@/components/ui/card'
-
-const categories = [
-  "Books",
-  "Electronics",
-  "Furniture",
-  "Clothing",
-  "Kitchen",
-  "Sports",
-  "Other"
-]
 
 export default function NewListing() {
   const [images, setImages] = useState<File[]>([])
@@ -104,21 +93,6 @@ export default function NewListing() {
               <Input id="price" name="price" type="number" min="0" step="0.01" required />
             </FormControl>
             <FormMessage />
-          </FormItem>
-
-          {/* Price */}
-          <FormItem>
-            <Label htmlFor="category">Category</Label>
-              <Select name="category" required>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a category" />
-                </SelectTrigger>
-              <SelectContent>
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category.toLowerCase()}>{category}</SelectItem>
-                ))}
-              </SelectContent>
-              </Select>
           </FormItem>
 
           {/* Images */}
