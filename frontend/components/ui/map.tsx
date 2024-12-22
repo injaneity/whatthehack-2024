@@ -4,6 +4,7 @@ import {
   Marker,
   InfoWindow,
   useLoadScript,
+  Libraries,
 } from '@react-google-maps/api';
 import { CircularProgress, Box, Typography } from '@mui/material';
 
@@ -27,13 +28,7 @@ interface DonationMapProps {
   keyword?: string;
 }
 
-const libraries: (
-  | 'drawing'
-  | 'geometry'
-  | 'localContext'
-  | 'places'
-  | 'visualization'
-)[] = ['places'];
+const libraries: Libraries = ["drawing", "geometry", "places", "visualization"];
 
 const mapContainerStyle: React.CSSProperties = {
   width: '100%',
@@ -75,14 +70,19 @@ const DonationMap: React.FC<DonationMapProps> = ({
         status === window.google.maps.places.PlacesServiceStatus.OK &&
         results
       ) {
-        const formattedResults: DonationCenter[] = results.map((place) => ({
-          place_id: place.place_id!,
-          name: place.name!,
-          geometry: place.geometry!,
-          vicinity: place.vicinity,
-          rating: place.rating,
-          types: place.types,
-        }));
+        const formattedResults: DonationCenter[] = results
+            .filter((place) => place.geometry?.location)
+            .map((place) => ({
+                place_id: place.place_id!,
+                name: place.name!,
+                geometry: {
+                location: place.geometry!.location!,
+                },
+                vicinity: place.vicinity ?? "Unknown location",
+                rating: place.rating ?? 0,
+                types: place.types ?? [],
+            }));
+
         setDonationCenters(formattedResults);
 
         // Handle pagination if more results are available
@@ -159,11 +159,6 @@ const DonationMap: React.FC<DonationMapProps> = ({
           onClick={() => {
             setSelectedCenter(center);
           }}
-          // Optionally, add a custom icon
-          // icon={{
-          //   url: '/icons/donation-center-icon.png',
-          //   scaledSize: new window.google.maps.Size(30, 30),
-          // }}
         />
       ))}
 
